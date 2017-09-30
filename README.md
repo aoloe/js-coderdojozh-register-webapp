@@ -6,7 +6,7 @@ Ask the the people who registered to a Coderdojo, how many kids they will bring 
 - `GET: event/{id}`: information about the event.
 - `POST: /event/{eventId}/participant/{userId}`: number of kids for each offer.
 
-You can see the more details about the API in our [PHP sample API](https://github.com/aoloe/php-coderdojozh-register-api).
+You can see the more details about the API in our [PHP sample API](https://github.com/aoloe/php-coderdojozh-registration-api).
 
 ## Install
 
