@@ -1,0 +1,38 @@
+h1, h2, h3 {
+  font-family:sans-serif;
+}
+table {
+  /* border:1px solid black; */
+  border-collapse: collapse;
+}
+table td {
+  /* border:1px solid black; */
+  padding-left:10px;
+  padding-right:10px;
+  vertical-align: bottom;
+  min-width:55px;
+}
+td.participants:nth-of-type(odd)
+{
+  background-color:#eef7ee;
+}
+th.topic {
+  padding-left:10px;
+  padding-right:10px;
+  font-weight:normal;
+}
+tr.total td,
+{
+  border-top:1px solid black;
+  background-color:#f7eeee;
+}
+tr.participant:hover,
+tr.participant:hover td.participants:nth-of-type(odd)
+{
+   background-color: #ffffdd;
+}
+td.notRegistered {
+  text-decoration:underline;
+  text-decoration-color: orange;
+  text-decoration-style: wavy;
+}
