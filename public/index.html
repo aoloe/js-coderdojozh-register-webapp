@@ -11,6 +11,12 @@
   </head>
   <body>
     <div id="app-7" style="max-width:64em;">
+	  <div v-if="warningNotSupported">
+		<h1>Unsupported Browser</h1>
+		<div>
+		  <p>Your browser is not supported, please use a modern version of your browser, Mozilla Firefox or Google Chrome.</p>
+		</div>
+	  </div>
       <p v-if="event.banner"><img :src=event.banner style="max-width:100%; height:auto; width:auto;"></p>
       <h1>{{ event.title }}</h1>
       <h2>{{ event.date }}</h2>
@@ -97,7 +103,7 @@
       props: ['person', 'topic'],
       template: `
         <tr>
-          <td><img :src=person.thumbnail style="display:inline-block; width:50px; height:50px;object-fit:contain;object-position:center bottom;"></td>
+          <td><img :src=person.thumbnail class="thumbnail"></td>
           <td v-bind:class="{ notRegistered: hasNotRegistered(person) }">{{ person.name }}</td>
           <td v-for="(item, index) in person.participants" class="participants">
             <span v-if="editMode">
@@ -127,7 +133,7 @@
         },
         save: function(person) {
           this.editMode = false;
-          axios.post(this.$options.apiUrl+'/api/event/' + getQueryArgument('id') + '/participant/' + person.id, {
+          axios.post(this.$root.$options.apiUrl+'/event/' + getQueryArgument('id') + '/participant/' + person.id, {
             count: person.participants
           });
         },
@@ -142,9 +148,10 @@
       }
     })
     var app7 = new Vue({
-      apiUrl : 'http://ww.dojo.ch',
+      apiUrl : 'http://ww.dojo.ch/api',
       el: '#app-7',
       data: {
+        warningNotSupported: false,
         eventId: getQueryArgument('id'),
         event: [],
         participant: [],
@@ -175,7 +182,7 @@
       },
       created: function () {
         // console.log('this', this);
-        axios.get(this.$options.apiUrl+'/api/event/' + this.eventId)
+        axios.get(this.$options.apiUrl+'/event/' + this.eventId)
           .then(function (response) {
             // console.log('event response', response);
             this.event = response.data;
@@ -184,7 +191,7 @@
           .catch(function (error) {
             console.log(error);
           });
-        axios.get(this.$options.apiUrl+'/api/event/' + this.eventId + '/rvsps')
+        axios.get(this.$options.apiUrl+'/event/' + this.eventId + '/rvsps')
           .then(function (response) {
             // console.log('rvsps response', response);
             this.participant = response.data['yes'];
